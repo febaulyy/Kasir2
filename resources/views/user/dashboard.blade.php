@@ -3,274 +3,177 @@
 @section('content')
 
 <style>
-    body {
-        background: #f4f1ec !important;
-        font-family: 'Poppins', sans-serif;
-        min-height: 100vh;
-    }
+body {
+    background: #f4f1ec !important;
+    font-family: 'Poppins', sans-serif;
+}
 
-    /* HEADER */
-    .coffee-header {
-        background: #48252F;
-        color: #E7D4BB;
-        padding: 2rem 0;
-        border-radius: 16px;
-        margin-bottom: 2rem;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-    }
+/* WRAPPER */
+.page {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem 1rem;
+}
 
-    .coffee-title {
-        font-size: 2.2rem;
-        font-weight: 700;
-        color: #E7D4BB;
-    }
+/* HEADER */
+.header {
+    background: #48252F;
+    color: #E7D4BB;
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+}
 
-    .coffee-subtitle {
-        font-size: 1.05rem;
-        color: #e0c9aa;
-    }
+/* FILTER BAR */
+.filter-bar {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #d1c7b8;
+    display: flex;
+    gap: 1rem;
+}
 
-    /* SEARCH */
-    .search-section {
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 1.6rem;
-        margin-bottom: 2rem;
-        border: 1px solid #d1c7b8;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
+/* INPUT */
+.search-input, .filter-select {
+    border-radius: 14px;
+    border: 1px solid #d1c7b8;
+    padding: 10px 14px;
+    background: #f9f7f3;
+}
 
-    .search-input,
-    .filter-select {
-        border-radius: 14px;
-        border: 1px solid #d1c7b8;
-        padding: 10px 14px;
-        background: #f9f7f3;
-    }
+/* LIST */
+.product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
-    .search-input:focus,
-    .filter-select:focus {
-        border-color: #48252F;
-        box-shadow: 0 0 0 2px rgba(72,37,47,0.15);
-        background: #fff;
-    }
+/* ROW CARD */
+.product-row {
+    display: flex;
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
 
-    /* GRID */
-    .product-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 1.6rem;
-    }
+/* IMAGE */
+.product-row img {
+    width: 160px;
+    height: 140px;
+    object-fit: cover;
+}
 
-    /* CARD */
-    .product-card {
-        background: #ffffff;
-        border-radius: 18px;
-        overflow: hidden;
-        box-shadow: 0 10px 22px rgba(0,0,0,0.1);
-        transition: 0.3s ease;
-    }
+/* CONTENT */
+.product-content {
+    flex: 1;
+    padding: 1rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    .product-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 30px rgba(0,0,0,0.15);
-    }
+/* LEFT INFO */
+.product-info h6 {
+    margin: 0;
+    font-weight: 600;
+}
 
-    .product-image {
-        height: 180px;
-        background: #eee;
-        position: relative;
-    }
+.product-info span {
+    color: #48252F;
+    font-weight: 700;
+}
 
-    .product-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+/* BUTTON */
+.btn-coffee {
+    background: #48252F;
+    color: #E7D4BB;
+    border-radius: 12px;
+    font-weight: 600;
+}
 
-    /* BADGE */
-    .category-badge {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: #48252F;
-        color: #E7D4BB;
-        padding: 4px 10px;
-        border-radius: 14px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-
-    .stock-out {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #b02a37;
-        color: #fff;
-        padding: 4px 10px;
-        border-radius: 14px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-
-    /* INFO */
-    .product-info {
-        padding: 1.2rem;
-    }
-
-    .product-name {
-        font-size: 1.05rem;
-        font-weight: 600;
-        color: #29281E;
-        margin-bottom: 6px;
-    }
-
-    .product-price {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #48252F;
-        margin-bottom: 12px;
-    }
-
-    /* BUTTON */
-    .btn-coffee {
-        background: #48252F;
-        color: #E7D4BB;
-        border-radius: 14px;
-        font-weight: 600;
-        width: 100%;
-    }
-
-    .btn-coffee:hover {
-        background: #29281E;
-        color: #E7D4BB;
-    }
-
-    .btn-disabled {
-        background: #e0e0e0 !important;
-        color: #777 !important;
-        border: none !important;
-    }
-
-    /* EMPTY */
-    .empty-state {
-        text-align: center;
-        padding: 3rem;
-        color: #48252F;
-    }
+.btn-disabled {
+    background: #e0e0e0;
+    color: #777;
+    border-radius: 12px;
+}
 </style>
 
-<div class="container-fluid px-4">
+<div class="page">
 
-    @if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show">
-        {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    @endif
-
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    @endif
-
-    {{-- HEADER --}}
-    <div class="coffee-header text-center">
-        <h1 class="coffee-title mb-2">
-            Selamat Datang
-        </h1>
-        <p class="coffee-subtitle mb-0">
-            Nikmati kopi terbaik bersama {{ Auth::user()->name }}
-        </p>
+    <div class="header">
+        <h4>Selamat Datang</h4>
+        <small>Nikmati kopi terbaik bersama {{ Auth::user()->name }}</small>
     </div>
 
-    {{-- SEARCH --}}
-    <div class="search-section">
-        <div class="row g-3">
-            <div class="col-md-8">
-                <input type="text" id="search" class="form-control search-input" placeholder="Cari produk...">
-            </div>
-            <div class="col-md-4">
-                <select id="filterKategori" class="form-select filter-select">
-                    <option value="">Semua Kategori</option>
-                    @foreach($kategori as $k)
-                        <option value="{{ $k->id }}">{{ $k->nama }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
+    <div class="filter-bar">
+        <input type="text" id="search" class="form-control search-input" placeholder="Cari produk...">
+        <select id="filterKategori" class="form-select filter-select">
+            <option value="">Semua Kategori</option>
+            @foreach($kategori as $k)
+                <option value="{{ $k->id }}">{{ $k->nama }}</option>
+            @endforeach
+        </select>
     </div>
 
-    {{-- PRODUK --}}
-    <div class="product-grid" id="produkList">
-        @forelse($produk as $item)
-        <div class="produk-item" data-kategori="{{ $item->kategori_id }}">
-            <div class="product-card">
+    <div class="product-list">
+        @foreach($produk as $item)
+        <div class="produk-item product-row" data-kategori="{{ $item->kategori_id }}">
 
-                <div class="product-image">
-                    @if($item->foto)
-                        <img src="{{ asset('storage/'.$item->foto) }}">
-                    @endif
+            @if($item->foto)
+                <img src="{{ asset('storage/'.$item->foto) }}">
+            @endif
 
-                    <div class="category-badge">
-                        {{ $item->kategori->nama }}
-                    </div>
+            <div class="product-content">
+                <div class="product-info">
+                    <h6>{{ $item->nama }}</h6>
+                    <small>{{ $item->kategori->nama }}</small><br>
+                    <span>Rp {{ number_format($item->harga,0,',','.') }}</span><br>
 
                     @if($item->stock <= 0)
-                        <div class="stock-out">Habis</div>
+                        <small class="text-danger">Stok Habis</small>
+                    @else
+                        <small class="text-success">Stok: {{ $item->stock }}</small>
                     @endif
                 </div>
 
-                <div class="product-info">
-                    <div class="product-name">{{ $item->nama }}</div>
-                    <div class="product-price">
-                        Rp {{ number_format($item->harga,0,',','.') }}
-                    </div>
-
+                <div>
                     @if($item->stock > 0)
                         <form action="{{ route('user.cart.add', $item->id) }}" method="POST">
                             @csrf
                             <button class="btn btn-coffee">
-                                Tambah ke Keranjang
+                                +
                             </button>
                         </form>
                     @else
-                        <button class="btn btn-disabled w-100" disabled>
+                        <button class="btn btn-disabled" disabled>
                             Tidak Tersedia
                         </button>
                     @endif
                 </div>
-
             </div>
+
         </div>
-        @empty
-        <div class="empty-state">
-            <h5>Belum ada produk tersedia</h5>
-        </div>
-        @endforelse
+        @endforeach
     </div>
 
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    document.getElementById('search').addEventListener('keyup', function() {
-        let q = this.value.toLowerCase();
-        document.querySelectorAll('.produk-item').forEach(item => {
-            item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
-        });
+document.getElementById('search').addEventListener('keyup', function() {
+    let q = this.value.toLowerCase();
+    document.querySelectorAll('.produk-item').forEach(item => {
+        item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
     });
+});
 
-    document.getElementById('filterKategori').addEventListener('change', function() {
-        let k = this.value;
-        document.querySelectorAll('.produk-item').forEach(item => {
-            item.style.display = (k === "" || item.dataset.kategori === k) ? "" : "none";
-        });
+document.getElementById('filterKategori').addEventListener('change', function() {
+    let k = this.value;
+    document.querySelectorAll('.produk-item').forEach(item => {
+        item.style.display = (k === "" || item.dataset.kategori === k) ? "" : "none";
     });
-
 });
 </script>
 
