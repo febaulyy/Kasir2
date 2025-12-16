@@ -2,32 +2,43 @@
 
 <?php $__env->startSection('content'); ?>
 
-<div class="container-fluid">
+<div class="container-fluid px-4 py-3">
 
     <!-- Judul -->
-    <h3 class="mb-4">Dashboard Overview</h3>
+    <h3 class="mb-4 fw-bold text-dark">
+        Dashboard Overview
+    </h3>
 
     <!-- Kartu Statistik -->
-    <div class="row g-3">
+    <div class="row g-4">
 
         <div class="col-md-4">
-            <div class="p-3 bg-white shadow-sm rounded">
-                <h6>Total Produk</h6>
-                <h3 class="fw-bold"><?php echo e($totalProduk); ?></h3>
+            <div class="p-4 bg-white shadow-sm rounded-4 border-start border-4 border-primary">
+                <div class="text-muted small mb-1">Total Produk</div>
+                <h3 class="fw-bold mb-0 text-dark">
+                    <?php echo e($totalProduk); ?>
+
+                </h3>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="p-3 bg-white shadow-sm rounded">
-                <h6>Total Pesanan Masuk</h6>
-                <h3 class="fw-bold"><?php echo e($totalPesanan); ?></h3>
+            <div class="p-4 bg-white shadow-sm rounded-4 border-start border-4 border-success">
+                <div class="text-muted small mb-1">Total Pesanan Masuk</div>
+                <h3 class="fw-bold mb-0 text-dark">
+                    <?php echo e($totalPesanan); ?>
+
+                </h3>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="p-3 bg-white shadow-sm rounded">
-                <h6>Transaksi Hari Ini</h6>
-                <h3 class="fw-bold">Rp <?php echo e(number_format($transaksiHariIni, 0, ',', '.')); ?></h3>
+            <div class="p-4 bg-white shadow-sm rounded-4 border-start border-4 border-warning">
+                <div class="text-muted small mb-1">Transaksi Hari Ini</div>
+                <h3 class="fw-bold mb-0 text-dark">
+                    Rp <?php echo e(number_format($transaksiHariIni, 0, ',', '.')); ?>
+
+                </h3>
             </div>
         </div>
 
@@ -35,7 +46,7 @@
 
 </div>
 
-<!-- AJAX Script -->
+<!-- AJAX Script (TIDAK DIUBAH) -->
 <script>
     document.getElementById('search').addEventListener('keyup', function() {
         let q = this.value;

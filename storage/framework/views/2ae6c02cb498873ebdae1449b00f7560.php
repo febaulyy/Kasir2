@@ -11,9 +11,18 @@
     <style>
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: #E7D4BB;
-            color: #29281E;
+            color: #E7D4BB;
+            background-image: 
+                linear-gradient(
+                    rgba(16,18,17,0.65),
+                    rgba(16,18,17,0.65)
+                ),
+                url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
+
 
         /* NAVBAR */
         .navbar {
@@ -27,11 +36,15 @@
         .nav-link {
             font-weight: 600;
             color: #E7D4BB !important;
-            opacity: 0.85;
+            opacity: 0.9;
         }
+
         .nav-link:hover {
+            color: #FFF8EE !important; /* tetap krem terang, BUKAN hijau */
             opacity: 1;
+            text-decoration: none;
         }
+
 
         /* HERO */
         .hero {
@@ -46,12 +59,13 @@
         .hero-title {
             font-size: 3rem;
             font-weight: 800;
+            color: #FFF8EE;
             margin-bottom: 15px;
         }
         .hero-desc {
             max-width: 620px;
             margin-bottom: 35px;
-            color: #48252F;
+            color: #EEDFC4;
             font-size: 1.1rem;
         }
 
@@ -66,18 +80,20 @@
             border: none;
         }
         .btn-main:hover {
+            color: #E7D4BB;
             background: #29281E;
         }
 
         .btn-outline-main {
-            border: 2px solid #48252F;
-            color: #48252F;
+            border: 2px solid #E7D4BB;
+            color: #E7D4BB;
             font-weight: 700;
             padding: 12px 34px;
             border-radius: 30px;
             transition: 0.25s;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.25); /* kunci masalah */
         }
+
         .btn-outline-main:hover {
             background: #48252F;
             color: #E7D4BB;

@@ -4,152 +4,250 @@
 
 <style>
     body {
-        background: #f2f2f7 !important;
-    }
-    
-    .btn-produk {
-        background-color: #333 !important;
-        border-color: #333 !important;
+        background: #f4f1ec !important;
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
     }
 
-    .btn-produk:hover {
-        background-color: #555 !important;
-        border-color: #555 !important;
+    /* HEADER */
+    .coffee-header {
+        background: #48252F;
+        color: #E7D4BB;
+        padding: 2rem 0;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.18);
     }
 
-    .card {
-        border: none;
-        border-radius: 12px;
+    .coffee-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #E7D4BB;
+    }
+
+    .coffee-subtitle {
+        font-size: 1.05rem;
+        color: #e0c9aa;
+    }
+
+    /* SEARCH */
+    .search-section {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 1.6rem;
+        margin-bottom: 2rem;
+        border: 1px solid #d1c7b8;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .search-input,
+    .filter-select {
+        border-radius: 14px;
+        border: 1px solid #d1c7b8;
+        padding: 10px 14px;
+        background: #f9f7f3;
+    }
+
+    .search-input:focus,
+    .filter-select:focus {
+        border-color: #48252F;
+        box-shadow: 0 0 0 2px rgba(72,37,47,0.15);
+        background: #fff;
+    }
+
+    /* GRID */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.6rem;
+    }
+
+    /* CARD */
+    .product-card {
+        background: #ffffff;
+        border-radius: 18px;
         overflow: hidden;
+        box-shadow: 0 10px 22px rgba(0,0,0,0.1);
+        transition: 0.3s ease;
     }
 
-    .card-title {
-        font-weight: 600;
-        color: #222;
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 30px rgba(0,0,0,0.15);
     }
 
-    .card-text {
-        color: #555;
-    }
-
-    #search, #filterKategori {
-        border-radius: 10px;
-        border: 1px solid #ccc;
-    }
-
-    #produkList .card-img-top {
+    .product-image {
+        height: 180px;
         background: #eee;
+        position: relative;
     }
 
-    /* Blur jika stok habis */
-    .img-blur {
-        filter: grayscale(80%) brightness(70%);
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* BADGE */
+    .category-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #48252F;
+        color: #E7D4BB;
+        padding: 4px 10px;
+        border-radius: 14px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .stock-out {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #b02a37;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 14px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    /* INFO */
+    .product-info {
+        padding: 1.2rem;
+    }
+
+    .product-name {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #29281E;
+        margin-bottom: 6px;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #48252F;
+        margin-bottom: 12px;
+    }
+
+    /* BUTTON */
+    .btn-coffee {
+        background: #48252F;
+        color: #E7D4BB;
+        border-radius: 14px;
+        font-weight: 600;
+        width: 100%;
+    }
+
+    .btn-coffee:hover {
+        background: #29281E;
+        color: #E7D4BB;
+    }
+
+    .btn-disabled {
+        background: #e0e0e0 !important;
+        color: #777 !important;
+        border: none !important;
+    }
+
+    /* EMPTY */
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: #48252F;
     }
 </style>
 
-<div class="container my-4">
+<div class="container-fluid px-4">
 
-@if(session('error'))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    {{ session('error') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-@endif
+    @if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    @endif
 
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ session('success') }}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-@endif
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    @endif
 
-    <!-- Search Produk -->
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <input type="text" id="search" class="form-control" placeholder="Cari produk...">
-        </div>
+    {{-- HEADER --}}
+    <div class="coffee-header text-center">
+        <h1 class="coffee-title mb-2">
+            Selamat Datang
+        </h1>
+        <p class="coffee-subtitle mb-0">
+            Nikmati kopi terbaik bersama {{ Auth::user()->name }}
+        </p>
+    </div>
 
-        <div class="col-md-4">
-            <select id="filterKategori" class="form-select">
-                <option value="">-- Semua Kategori --</option>
-                @foreach($kategori as $k)
-                    <option value="{{ $k->id }}">{{ $k->nama }}</option>
-                @endforeach
-            </select>
+    {{-- SEARCH --}}
+    <div class="search-section">
+        <div class="row g-3">
+            <div class="col-md-8">
+                <input type="text" id="search" class="form-control search-input" placeholder="Cari produk...">
+            </div>
+            <div class="col-md-4">
+                <select id="filterKategori" class="form-select filter-select">
+                    <option value="">Semua Kategori</option>
+                    @foreach($kategori as $k)
+                        <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     </div>
 
-    <div class="row" id="produkList">
+    {{-- PRODUK --}}
+    <div class="product-grid" id="produkList">
         @forelse($produk as $item)
-        <div class="col-md-4 mb-4 produk-item" data-kategori="{{ $item->kategori_id }}">
-            <div class="card h-100 shadow-sm position-relative">
-                
-                @if($item->foto)
-                    <img 
-                        src="{{ asset('storage/'.$item->foto) }}" 
-                        class="card-img-top {{ $item->stock <= 0 ? 'img-blur' : '' }}"
-                        style="height:180px; object-fit:cover;">
-                @endif
+        <div class="produk-item" data-kategori="{{ $item->kategori_id }}">
+            <div class="product-card">
 
-                {{-- BADGE STOK HABIS --}}
-                @if($item->stock <= 0)
-                <div class="position-absolute top-0 start-0 bg-danger text-white px-3 py-1 rounded-bottom-end fw-bold">
-                    Habis
-                </div>
-                @endif
-                
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ $item->nama }}</h5>
-                    <p class="card-text mb-1">Rp {{ number_format($item->harga,0,',','.') }}</p>
-
-                    {{-- STATUS STOK --}}
-                    @if($item->stock <= 0)
-                        <p class="card-text text-danger fw-bold mb-2 d-none">Stok: Habis</p>
-                    @else 
-                        <p class="card-text text-success fw-semibold mb-2 d-none">Stok: {{ $item->stock }}</p>
+                <div class="product-image">
+                    @if($item->foto)
+                        <img src="{{ asset('storage/'.$item->foto) }}">
                     @endif
 
-                    <p class="card-text flex-grow-1 d-none">{{ $item->deskripsi }}</p>
-
-                    <div class="mt-auto">
-
-                        {{-- KALO STOK ADA --}}
-                        @if($item->stock > 0)
-                            <div class="d-flex gap-2">
-
-                                {{-- Tambah ke Keranjang --}}
-                                <form action="{{ route('user.cart.add', $item->id) }}" method="POST" class="flex-grow-1">
-                                    @csrf
-                                    <button type="submit" class="btn btn-dark w-100 d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-shopping-cart me-2"></i> Tambahkan ke Keranjang
-                                    </button>
-                                </form>
-
-                                {{-- Beli Sekarang (optional aktifkan bila mau) --}}
-                                <form action="{{ route('user.checkout.now', $item->id) }}" method="POST" class="flex-grow-1 d-none">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success w-100 d-flex align-items-center justify-content-center">
-                                        <i class="fas fa-bolt me-2"></i> Beli
-                                    </button>
-                                </form>
-
-                            </div>
-
-                        {{-- KALO STOK HABIS --}}
-                        @else
-                            <button class="btn btn-secondary w-100" disabled>
-                                Tidak Tersedia
-                            </button>
-                        @endif
-
+                    <div class="category-badge">
+                        {{ $item->kategori->nama }}
                     </div>
 
+                    @if($item->stock <= 0)
+                        <div class="stock-out">Habis</div>
+                    @endif
                 </div>
+
+                <div class="product-info">
+                    <div class="product-name">{{ $item->nama }}</div>
+                    <div class="product-price">
+                        Rp {{ number_format($item->harga,0,',','.') }}
+                    </div>
+
+                    @if($item->stock > 0)
+                        <form action="{{ route('user.cart.add', $item->id) }}" method="POST">
+                            @csrf
+                            <button class="btn btn-coffee">
+                                Tambah ke Keranjang
+                            </button>
+                        </form>
+                    @else
+                        <button class="btn btn-disabled w-100" disabled>
+                            Tidak Tersedia
+                        </button>
+                    @endif
+                </div>
+
             </div>
         </div>
         @empty
-        <div class="col-12">
-            <p class="text-center">Belum ada produk tersedia.</p>
+        <div class="empty-state">
+            <h5>Belum ada produk tersedia</h5>
         </div>
         @endforelse
     </div>
@@ -159,27 +257,17 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const searchInput = document.getElementById('search');
-    searchInput.addEventListener('keyup', function() {
-        let query = this.value.toLowerCase();
+    document.getElementById('search').addEventListener('keyup', function() {
+        let q = this.value.toLowerCase();
         document.querySelectorAll('.produk-item').forEach(item => {
-            let text = item.textContent.toLowerCase();
-            item.style.display = text.includes(query) ? '' : 'none';
+            item.style.display = item.textContent.toLowerCase().includes(q) ? '' : 'none';
         });
     });
 
-    const filterSelect = document.getElementById('filterKategori');
-    filterSelect.addEventListener('change', function() {
-        let kategori = this.value.trim();
-        
+    document.getElementById('filterKategori').addEventListener('change', function() {
+        let k = this.value;
         document.querySelectorAll('.produk-item').forEach(item => {
-            let itemKategori = item.dataset.kategori;
-
-            if (kategori === "" || itemKategori === kategori) {
-                item.style.display = "";
-            } else {
-                item.style.display = "none";
-            }
+            item.style.display = (k === "" || item.dataset.kategori === k) ? "" : "none";
         });
     });
 

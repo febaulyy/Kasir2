@@ -12,30 +12,30 @@
 
 <style>
     body {
-        background: #f2f2f7 !important; /* abu lembut */
+        background: #f4f1ec !important; /* krem lembut */
     }
 
     .cart-wrapper {
-        background: #f2f2f7;
+        background: #f4f1ec;
         padding: 10px 0;
     }
 
     .cart-card {
-        background: #fff;
-        border-radius: 14px;
+        background: #ffffff;
+        border-radius: 16px;
         padding: 18px;
         display: flex;
         gap: 16px;
         align-items: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        margin-bottom: 16px;
-        border: 1px solid #ececec; /* biar lebih terpisah */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        margin-bottom: 18px;
+        border: 1px solid #e5dccd;
     }
 
     .cart-img {
         width: 110px;
         height: 110px;
-        border-radius: 10px;
+        border-radius: 12px;
         object-fit: cover;
     }
 
@@ -57,32 +57,62 @@
     .qty-box {
         display: flex;
         align-items: center;
-        gap: 6px;
-        background: #f6f6f6;
-        padding: 6px 10px;
-        border-radius: 8px;
-        border: 1px solid #ddd;
+        gap: 8px;
+        background: #f6f2ea;
+        padding: 6px 12px;
+        border-radius: 10px;
+        border: 1px solid #d6c8b5;
     }
 
     .qty-btn {
         width: 28px;
         height: 28px;
         border-radius: 6px;
-        border: 1px solid #ccc;
-        background: #fff;
+        border: 1px solid #c7b299;
+        background: #ffffff;
+        color: #4a2c2a;
+        font-weight: bold;
+    }
+
+    .qty-btn:hover {
+        background: #4a2c2a;
+        color: #ffffff;
     }
 
     .total-price {
-        font-weight: bold;
-        color: #28a745;
+        font-weight: 700;
+        color: #4a2c2a; /* coklat coffee */
     }
+
+    .btn-danger {
+        background-color: #8b3a3a;
+        border-color: #8b3a3a;
+    }
+
+    .btn-danger:hover {
+        background-color: #6f2c2c;
+        border-color: #6f2c2c;
+    }
+
+    .btn-success {
+        background-color: #4a2c2a;
+        border-color: #4a2c2a;
+    }
+
+    .btn-success:hover {
+        background-color: #2e1b19;
+        border-color: #2e1b19;
+    }
+
 </style>
 
 <div class="cart-wrapper">
 
     <div class="container py-4">
 
-        <h4 class="fw-bold mb-4">Keranjang Belanja</h4>
+        <h4 class="fw-bold mb-4" style="color:#2e1b19;">
+            Keranjang Belanja
+        </h4>
 
         <?php if(empty($cart) || count($cart) === 0): ?>
 
@@ -100,8 +130,14 @@
                 <img src="<?php echo e(asset('storage/'.$item['foto'])); ?>" class="cart-img">
 
                 <div class="cart-info">
-                    <div class="fw-semibold mb-1"><?php echo e($item['nama']); ?></div>
-                    <div class="text-muted mb-2">Rp <?php echo e(number_format($item['harga'], 0, ',', '.')); ?></div>
+                    <div class="fw-semibold mb-1" style="color:#2e1b19;">
+                        <?php echo e($item['nama']); ?>
+
+                    </div>
+                    <div class="text-muted mb-2">
+                        Rp <?php echo e(number_format($item['harga'], 0, ',', '.')); ?>
+
+                    </div>
 
                     <div class="qty-box">
                         <form action="<?php echo e(route('user.cart.update', $id)); ?>" method="POST" class="m-0">
@@ -139,9 +175,9 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             <div class="d-flex justify-content-between align-items-center mt-3 p-3 bg-white rounded-4 shadow-sm border">
-                <h5 class="fw-bold m-0">
+                <h5 class="fw-bold m-0" style="color:#2e1b19;">
                     Total Bayar:
-                    <span class="text-primary">
+                    <span style="color:#4a2c2a;">
                         Rp <?php echo e(number_format(collect($cart)->sum(fn($c) => $c['harga'] * $c['qty']), 0, ',', '.')); ?>
 
                     </span>

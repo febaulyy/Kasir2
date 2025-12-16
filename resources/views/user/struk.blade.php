@@ -8,24 +8,32 @@
         body {
             font-family: DejaVu Sans, sans-serif;
             font-size: 12px;
-            margin: 20px;
-            color: #000;
+            margin: 24px;
+            color: #2e1b19;
         }
 
         .title {
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 8px;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
         }
 
-        .center {
+        .subtitle {
             text-align: center;
+            font-size: 11px;
+            color: #6b4f3f;
+            margin-bottom: 12px;
         }
+
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .bold { font-weight: bold; }
 
         .line {
-            border-bottom: 1px dashed #000;
-            margin: 10px 0;
+            border-bottom: 1px dashed #6b4f3f;
+            margin: 12px 0;
         }
 
         table {
@@ -38,12 +46,13 @@
             vertical-align: top;
         }
 
-        .right {
-            text-align: right;
+        .item-name {
+            font-weight: 600;
         }
 
-        .bold {
-            font-weight: bold;
+        .item-detail {
+            font-size: 11px;
+            color: #6b4f3f;
         }
 
         .total {
@@ -53,12 +62,21 @@
 
         .small {
             font-size: 11px;
+            color: #6b4f3f;
+        }
+
+        .footer {
+            margin-top: 14px;
+            text-align: center;
+            font-size: 11px;
+            color: #6b4f3f;
         }
     </style>
 </head>
 <body>
 
-    <div class="title">STRUK PEMBELIAN</div>
+    <div class="title">COFFEE CORNER</div>
+    <div class="subtitle">Struk Pembelian</div>
 
     <div class="small">
         <strong>ID Pesanan:</strong> #{{ $order->id }}<br>
@@ -71,20 +89,19 @@
 
     <table>
         @foreach ($order->details as $item)
-            <tr>
-                <td>
-                    {{ $item->nama_produk }}
-                    <br>
-                    <small>
-                        Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}
-                        × {{ $item->qty }}
-                    </small>
-                </td>
-                <td class="right">
-                    Rp {{ number_format($item->subtotal, 0, ',', '.') }}
-                </td>
-            </tr>
-            @endforeach
+        <tr>
+            <td>
+                <div class="item-name">{{ $item->nama_produk }}</div>
+                <div class="item-detail">
+                    Rp {{ number_format($item->harga_satuan, 0, ',', '.') }}
+                    × {{ $item->qty }}
+                </div>
+            </td>
+            <td class="right">
+                Rp {{ number_format($item->subtotal, 0, ',', '.') }}
+            </td>
+        </tr>
+        @endforeach
     </table>
 
     <div class="line"></div>
@@ -98,28 +115,27 @@
         </tr>
 
         @if($order->metode_pembayaran === 'Cash')
-            <tr>
-                <td>Uang Dibayar</td>
-                <td class="right">
-                    Rp {{ number_format($order->uang_dibayar, 0, ',', '.') }}
-                </td>
-            </tr>
-            <tr>
-                <td>Kembalian</td>
-                <td class="right">
-                    Rp {{ number_format($order->kembalian, 0, ',', '.') }}
-                </td>
-            </tr>
+        <tr>
+            <td>Uang Dibayar</td>
+            <td class="right">
+                Rp {{ number_format($order->uang_dibayar, 0, ',', '.') }}
+            </td>
+        </tr>
+        <tr>
+            <td>Kembalian</td>
+            <td class="right">
+                Rp {{ number_format($order->kembalian, 0, ',', '.') }}
+            </td>
+        </tr>
         @endif
-
     </table>
 
     <div class="line"></div>
 
-    <p class="center small">
+    <div class="footer">
         Terima kasih telah berbelanja 🙏<br>
         Barang yang sudah dibeli tidak dapat dikembalikan
-    </p>
+    </div>
 
 </body>
 </html>

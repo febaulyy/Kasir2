@@ -26,7 +26,7 @@ class UserController extends Controller
             $query->where('nama', 'like', '%' . $request->search . '%');
         }
 
-        $produk = $query->latest()->paginate(12);
+        $produk = $query->with('kategori')->latest()->paginate(12);
         $kategori = Kategori::all();
 
         return view('user.dashboard', compact('produk', 'kategori'));

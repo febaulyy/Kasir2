@@ -16,30 +16,56 @@
             right: -10px;
             font-size: 0.7rem;
         }
-        .navbar-brand img {
-            height: 40px;
-            margin-right: 8px;
+
+        /* NAVBAR COFFEE THEME */
+        .navbar {
+            background-color: #29281E !important;
         }
-        .card-product img {
-            max-height: 150px;
-            object-fit: cover;
+
+        .navbar-brand,
+        .navbar .nav-link {
+            color: #E7D4BB !important;
+            font-weight: 600;
+        }
+
+        .navbar .nav-link.active {
+            color: #FFF8EE !important;
+            font-weight: 700;
+            border-bottom: 2px solid #E7D4BB;
+        }
+
+        .navbar .nav-link:hover {
+            color: #FFF8EE !important;
+        }
+
+        .btn-logout {
+            background-color: #48252F;
+            border-color: #48252F;
+            color: #E7D4BB;
+        }
+
+        .btn-logout:hover {
+            background-color: #1f1d17;
+            border-color: #1f1d17;
+            color: #E7D4BB;
         }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-2">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg shadow-sm py-2">
         <div class="container">
 
             <!-- Brand -->
             <a class="navbar-brand d-flex align-items-center fw-bold" href="{{ route('user.dashboard') }}">
-                <i class="bi bi-person-circle fs-3 me-2 text-primary"></i>
+                <i class="bi bi-person-circle fs-3 me-2"></i>
                 {{ Auth::user()->name }}
             </a>
 
             <!-- Toggle -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -48,14 +74,14 @@
                 <ul class="navbar-nav ms-auto align-items-center gap-4">
 
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('user.dashboard') ? 'active fw-semibold text-primary' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}" 
                            href="{{ route('user.dashboard') }}">
                             <i class="bi bi-house-door me-1"></i> Home
                         </a>
                     </li>
 
                     <li class="nav-item position-relative">
-                        <a class="nav-link {{ request()->routeIs('user.cart') ? 'active fw-semibold text-primary' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('user.cart') ? 'active' : '' }}" 
                            href="{{ route('user.cart.index') }}">
                             <i class="bi bi-cart3 me-1"></i> Cart
                             @if(session('cart') && count(session('cart')) > 0)
@@ -67,7 +93,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('user.riwayat') ? 'active fw-semibold text-primary' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('user.riwayat') ? 'active' : '' }}" 
                            href="{{ route('user.riwayat') }}">
                             <i class="bi bi-clock-history me-1"></i> Riwayat
                         </a>
@@ -76,7 +102,7 @@
                     <li class="nav-item ms-3">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-primary btn-sm px-3">
+                            <button type="submit" class="btn btn-sm px-3 btn-logout">
                                 <i class="bi bi-box-arrow-right me-1"></i> Logout
                             </button>
                         </form>
@@ -88,6 +114,7 @@
         </div>
     </nav>
 
+    <!-- CONTENT -->
     <div class="container mt-4">
         @yield('content')
     </div>

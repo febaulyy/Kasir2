@@ -4,22 +4,22 @@
 <?php $__env->startSection('content'); ?>
 
 <style>
-    body { background:#f2f6ff !important; }
+    body { background:#f4f1ec !important; } /* krem coffee */
 
     .box {
-        background:#fff;
+        background:#ffffff;
         padding:18px;
-        border-radius:14px;
+        border-radius:16px;
         margin-bottom:18px;
-        border:1px solid #dbe4ff;
-        box-shadow:0 2px 5px rgba(0,56,255,.05);
+        border:1px solid #e5dccd;
+        box-shadow:0 6px 18px rgba(0,0,0,.08);
     }
 
     .product {
         display:flex;
         gap:14px;
         padding:12px 0;
-        border-bottom:1px solid #eef2ff;
+        border-bottom:1px solid #eee4d6;
     }
 
     .product:last-child { border-bottom:none; }
@@ -28,8 +28,8 @@
         width:80px;
         height:80px;
         object-fit:cover;
-        border-radius:10px;
-        border:1px solid #d7e3ff;
+        border-radius:12px;
+        border:1px solid #d6c8b5;
     }
 
     .pay-option {
@@ -37,56 +37,64 @@
         align-items:center;
         gap:12px;
         padding:12px;
-        border:1px solid #dbe4ff;
-        border-radius:12px;
-        background:#f8faff;
+        border:1px solid #d6c8b5;
+        border-radius:14px;
+        background:#f7f2ea;
         cursor:pointer;
     }
 
     .pay-option:hover {
-        background:#eef4ff;
-        border-color:#a8c1ff;
+        background:#efe6d8;
+        border-color:#bfa58a;
     }
 
     .qris-box {
         display:none;
         margin-top:14px;
         padding:16px;
-        background:#f0f4ff;
-        border:1px solid #c8d6ff;
+        background:#f6f2ea;
+        border:1px solid #d6c8b5;
         border-radius:14px;
         text-align:center;
     }
 
     .total-box {
-        background:#fff;
+        background:#ffffff;
         padding:18px;
-        border-radius:14px;
-        border-top:1px solid #d0dcff;
-        box-shadow:0 -2px 5px rgba(0,0,0,.08);
+        border-radius:16px;
+        border-top:1px solid #e5dccd;
+        box-shadow:0 -4px 12px rgba(0,0,0,.08);
     }
 
     .btn-blue {
-        background:#2458ff;
+        background:#4a2c2a;
         color:white;
         font-weight:600;
-        border-radius:10px;
+        border-radius:12px;
+        border:none;
     }
 
-    .text-blue { color:#2458ff; }
+    .btn-blue:hover {
+        background:#2e1b19;
+    }
+
+    .text-blue { color:#4a2c2a; }
 </style>
 
 <div class="container mt-3 mb-5">
 
     
     <div class="box">
-        <h5 class="fw-bold mb-3">Produk Dipesan</h5>
+        <h5 class="fw-bold mb-3" style="color:#2e1b19;">Produk Dipesan</h5>
 
         <?php $__currentLoopData = $cart; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="product">
             <img src="<?php echo e(asset('storage/'.$item['foto'])); ?>">
             <div class="flex-grow-1">
-                <div class="fw-semibold"><?php echo e($item['nama']); ?></div>
+                <div class="fw-semibold" style="color:#2e1b19;">
+                    <?php echo e($item['nama']); ?>
+
+                </div>
                 <small class="text-muted">Qty <?php echo e($item['qty']); ?></small>
             </div>
             <div class="fw-bold text-blue">
@@ -106,7 +114,7 @@
 
         
         <div class="box">
-            <h5 class="fw-bold mb-3">Metode Pembayaran</h5>
+            <h5 class="fw-bold mb-3" style="color:#2e1b19;">Metode Pembayaran</h5>
 
             <label class="pay-option mb-2 d-none">
                 <input type="radio" name="metode_pembayaran" value="Transfer Bank" checked>
@@ -130,7 +138,7 @@
 
             
             <div id="cashBox" class="qris-box">
-                <div class="mb-2 fw-semibold">Uang Dibayar</div>
+                <div class="mb-2 fw-semibold" style="color:#2e1b19;">Uang Dibayar</div>
                 <input type="number" id="uangInput" class="form-control mb-3" placeholder="0">
 
                 <div class="d-flex justify-content-between p-2 border rounded">
@@ -143,7 +151,7 @@
         
         <div class="total-box">
             <div class="d-flex justify-content-between mb-3">
-                <span class="fw-semibold">Total</span>
+                <span class="fw-semibold" style="color:#2e1b19;">Total</span>
                 <span class="fw-bold text-blue">
                     Rp <?php echo e(number_format($total = collect($cart)->sum(fn($c)=>$c['harga']*$c['qty']),0,',','.')); ?>
 
