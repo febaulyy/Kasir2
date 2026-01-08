@@ -155,7 +155,7 @@
                 </label>
             </div>
 
-            <div id="qrisBox" class="qris-box d-none">
+            <div id="qrisBox" class="qris-box">
                 <h6 class="fw-bold mb-2" style="color:#1a2c7e;">Scan QRIS untuk Pembayaran</h6>
                 <img src="<?php echo e(asset('assets/qris.jpg')); ?>" alt="QRIS">
             </div>

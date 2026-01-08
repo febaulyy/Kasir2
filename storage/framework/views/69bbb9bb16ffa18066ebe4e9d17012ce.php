@@ -106,9 +106,9 @@
 
                     
                     <?php if($item->stock <= 0): ?>
-                        <p class="card-text text-danger fw-bold mb-2 d-none">Stok: Habis</p>
+                        <p class="card-text text-danger fw-bold mb-2">Stok: Habis</p>
                     <?php else: ?> 
-                        <p class="card-text text-success fw-semibold mb-2 d-none">Stok: <?php echo e($item->stock); ?></p>
+                        <p class="card-text text-success fw-semibold mb-2">Stok: <?php echo e($item->stock); ?></p>
                     <?php endif; ?>
 
                     <p class="card-text flex-grow-1"><?php echo e($item->deskripsi); ?></p>
@@ -128,7 +128,7 @@
                                 </form>
 
                                 
-                                <form action="<?php echo e(route('user.checkout.now', $item->id)); ?>" method="POST" class="flex-grow-1 d-none">
+                                <form action="<?php echo e(route('user.checkout.now', $item->id)); ?>" method="POST" class="flex-grow-1">
                                     <?php echo csrf_field(); ?>
                                     <button type="submit" class="btn btn-success w-100 d-flex align-items-center justify-content-center">
                                         <i class="fas fa-bolt me-2"></i> Beli

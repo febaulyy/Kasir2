@@ -116,12 +116,12 @@
         <div class="box">
             <h5 class="fw-bold mb-3" style="color:#2e1b19;">Metode Pembayaran</h5>
 
-            <label class="pay-option mb-2 d-none">
+            <label class="pay-option mb-2">
                 <input type="radio" name="metode_pembayaran" value="Transfer Bank" checked>
                 Transfer Bank
             </label>
 
-            <label class="pay-option mb-2 d-none">
+            <label class="pay-option mb-2">
                 <input type="radio" name="metode_pembayaran" value="E-Wallet">
                 E-Wallet
             </label>
@@ -132,7 +132,7 @@
             </label>
 
             
-            <div id="qrisBox" class="qris-box d-none">
+            <div id="qrisBox" class="qris-box">
                 <img src="<?php echo e(asset('assets/qris.jpg')); ?>" width="200">
             </div>
 
